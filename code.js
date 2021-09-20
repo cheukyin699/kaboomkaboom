@@ -28,7 +28,7 @@ const EXPLODE_TIME = getExplodeTime();
 
 // Enum: 'far-away' or 'near'
 // XXX: change this
-let appState = 'far-awa';
+let appState = 'far-away';
 let timer = null;
 
 // Load bg image based on appState var
@@ -55,7 +55,7 @@ function getRemainingTime(diffMS) {
 
 function beep() {
   let a = new Audio(BEEP_FILE);
-  a.play();
+  // a.play();
 }
 
 function explode() {
@@ -74,6 +74,20 @@ function tick() {
     beep();
     document.getElementById('timer').innerHTML = getRemainingTime(diffMS);
   }
+}
+
+function onClickBomb() {
+  if (appState === 'far-away') {
+    appState = 'near';
+    document.getElementById('timer').classList.add('hidden');
+    document.getElementById('codeInput').classList.remove('hidden');
+  } else {
+    appState = 'far-away';
+    document.getElementById('timer').classList.remove('hidden');
+    document.getElementById('codeInput').classList.add('hidden');
+  }
+
+  loadBgImage();
 }
 
 function init() {
