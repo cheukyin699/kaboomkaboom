@@ -18,7 +18,8 @@ function getExplodeTime() {
   return t;
 }
 
-const HASHED_SECRET = -906277200;
+// FIXME: add hashed secret
+const HASHED_SECRET = -1852947792;
 const IMG_FAR = 'bomb-far.png';
 const IMG_NEAR = 'bomb-near.png';
 const IMG_ERROR = 'bomb-placeholder.png';
@@ -93,6 +94,16 @@ function onClickBomb() {
 function init() {
   timer = setInterval(tick, 1000);
   loadBgImage();
+}
+
+function checkPasscode() {
+  document.getElementById('passcode').value = document.getElementById('passcode').value.toUpperCase();
+  const text = document.getElementById('passcode').value;
+  if (text.hashCode() === HASHED_SECRET) {
+    // FIXME: display winning graphic, disable countdown
+    clearInterval(timer);
+    alert("FIXME: Bomb defused");
+  }
 }
 
 init();
