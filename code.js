@@ -10,12 +10,23 @@ String.prototype.hashCode = function() {
   return hash;
 };
 
-// Set exploding time to 2130, irrespective of date.
+// Add a day to the given Date object, returning a new Date object.
+function addDayTo(t) {
+  const dayInMilliseconds = 1000 * 60 * 60 * 24;
+  return new Date(t.valueOf() + dayInMilliseconds);
+}
+
+// Set exploding time to 2130 on the current day.
+// If we have already passed that time, we add a day.
 function getExplodeTime() {
   let t = new Date();
-  // XXX: change this
   t.setHours(21, 30, 0);
-  return t;
+
+  if (t - (new Date()) < 0) {
+    return addDayTo(t);
+  } else {
+    return t;
+  }
 }
 
 // FIXME: add hashed secret
