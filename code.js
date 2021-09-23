@@ -84,7 +84,7 @@ function tick() {
     return;
   } else {
     beep();
-    document.getElementById('timer').innerHTML = getRemainingTime(diffMS);
+    document.getElementById('timer').innerHTML = '還有 ' + getRemainingTime(diffMS);
   }
 }
 

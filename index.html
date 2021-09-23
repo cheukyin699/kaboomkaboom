@@ -11,7 +11,6 @@
 
 body * {
   position: absolute;
-  margin: auto;
 }
 
 img {
@@ -28,18 +27,25 @@ input {
   color: green;
 }
 
-div {
-  background-color: black;
-  color: green;
-}
-
 .hidden {
   display: none;
 }
 
 #timer {
+  background-color: black;
+  color: green;
+  padding: 0.5rem;
+
   font-family: digitalDisplay;
   font-size: 40px;
+
+  left: 44%;
+  top: 20%;
+}
+
+#codeInput {
+  left: 40%;
+  bottom: 20%;
 }
     </style>
   </head>
@@ -47,6 +53,7 @@ div {
     <img
         id="imgBomb"
         src="./bomb-placeholder.png"
+        width="99%"
         onclick="onClickBomb()"
         alt="There should be a bomb here, but something happened sooo">
     <div id="timer">00:00:00</div>
