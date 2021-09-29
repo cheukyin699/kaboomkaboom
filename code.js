@@ -68,7 +68,7 @@ function getRemainingTime(diffMS) {
 
 function beep() {
   let a = new Audio(BEEP_FILE);
-  // a.play();
+  a.play();
 }
 
 function explode() {
