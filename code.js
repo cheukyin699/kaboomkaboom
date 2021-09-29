@@ -29,8 +29,10 @@ function getExplodeTime() {
   }
 }
 
-// FIXME: add hashed secret
-const HASHED_SECRET = -1852947792;
+// 1. with spaces
+// 2. without spaces
+// 3. actual chinese
+const HASHED_SECRETS = [1679872187, 449120043, -2073388383];
 const IMG_FAR = 'bomb-far.png';
 const IMG_NEAR = 'bomb-near.png';
 const IMG_ERROR = 'bomb-placeholder.png';
@@ -39,7 +41,6 @@ const EXPLODE_FILE = 'explosion.mp3';
 const EXPLODE_TIME = getExplodeTime();
 
 // Enum: 'far-away' or 'near'
-// XXX: change this
 let appState = 'far-away';
 let timer = null;
 
@@ -108,12 +109,14 @@ function init() {
 }
 
 function checkPasscode() {
-  document.getElementById('passcode').value = document.getElementById('passcode').value.toUpperCase();
+  // document.getElementById('passcode').value = document.getElementById('passcode').value.toUpperCase();
   const text = document.getElementById('passcode').value;
-  if (text.hashCode() === HASHED_SECRET) {
-    // FIXME: display winning graphic, disable countdown
-    clearInterval(timer);
-    alert("FIXME: Bomb defused");
+  for (let secret of HASHED_SECRETS) {
+    if (text.hashCode() === secret) {
+      clearInterval(timer);
+      document.getElementById('timer').innerHTML = 'Bomb defused. You win!';
+      onClickBomb();
+    }
   }
 }
 
