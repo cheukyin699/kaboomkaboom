@@ -47,7 +47,7 @@ input {
   top: 20%;
 }
 
-#codeInput {
+#passcode {
   left: 40%;
   bottom: 20%;
 }
@@ -61,9 +61,7 @@ input {
         onclick="onClickBomb()"
         alt="There should be a bomb here, but something happened sooo">
     <div id="timer">00:00:00</div>
-    <form class="hidden" id=codeInput>
-      <input type="text" placeholder="Password" onkeyup="checkPasscode()" id="passcode">
-    </form>
+    <input class="hidden" type="text" placeholder="Password" onkeyup="checkPasscode()" id="passcode">
     <script src="./code.js"></script>
   </body>
 </html>

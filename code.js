@@ -29,10 +29,11 @@ function getExplodeTime() {
   }
 }
 
-// 1. with spaces
-// 2. without spaces
+// 1. english with spaces
+// 2. english without spaces
 // 3. actual chinese
-const HASHED_SECRETS = [1679872187, 449120043, -2073388383];
+// 4. actual chinese no spaces
+const HASHED_SECRETS = [1679872187, 449120043, -2073388383, 1913777981];
 const IMG_FAR = 'bomb-far.png';
 const IMG_NEAR = 'bomb-near.png';
 const IMG_ERROR = 'bomb-placeholder.png';
@@ -93,11 +94,11 @@ function onClickBomb() {
   if (appState === 'far-away') {
     appState = 'near';
     document.getElementById('timer').classList.add('hidden');
-    document.getElementById('codeInput').classList.remove('hidden');
+    document.getElementById('passcode').classList.remove('hidden');
   } else {
     appState = 'far-away';
     document.getElementById('timer').classList.remove('hidden');
-    document.getElementById('codeInput').classList.add('hidden');
+    document.getElementById('passcode').classList.add('hidden');
   }
 
   loadBgImage();
