@@ -37,6 +37,7 @@ const HASHED_SECRETS = [1679872187, 449120043, -2073388383, 1913777981];
 const IMG_FAR = 'bomb-far.png';
 const IMG_NEAR = 'bomb-near.png';
 const IMG_ERROR = 'bomb-placeholder.png';
+const IMG_NOBOMB = 'no-bomb.png';
 const BEEP_FILE = 'beep.ogg';
 const EXPLODE_FILE = 'explosion.mp3';
 const EXPLODE_TIME = getExplodeTime();
@@ -83,7 +84,7 @@ function tick() {
   if (diffMS <= 0) {
     explode();
     clearInterval(timer);
-    return;
+    appState = 'lost';
   } else {
     beep();
     document.getElementById('timer').innerHTML = '還有 ' + getRemainingTime(diffMS);
@@ -91,6 +92,10 @@ function tick() {
 }
 
 function onClickBomb() {
+  if (appState === 'won' || appState === 'lost') {
+    return;
+  }
+
   if (appState === 'far-away') {
     appState = 'near';
     document.getElementById('timer').classList.add('hidden');
@@ -110,13 +115,20 @@ function init() {
 }
 
 function checkPasscode() {
-  // document.getElementById('passcode').value = document.getElementById('passcode').value.toUpperCase();
+  if (appState === 'won' || appState === 'lost') {
+    return;
+  }
+
   const text = document.getElementById('passcode').value;
   for (let secret of HASHED_SECRETS) {
     if (text.hashCode() === secret) {
       clearInterval(timer);
+      document.getElementById('timer').classList.remove('hidden');
       document.getElementById('timer').innerHTML = 'Bomb defused. You win!';
-      onClickBomb();
+      document.getElementById('passcode').classList.add('hidden');
+      document.getElementById('imgBomb').src = IMG_NOBOMB;
+      appState = 'won';
+      return;
     }
   }
 }
