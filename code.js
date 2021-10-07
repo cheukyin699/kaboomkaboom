@@ -17,16 +17,10 @@ function addDayTo(t) {
 }
 
 // Set exploding time to 2130 on the current day.
-// If we have already passed that time, we add a day.
 function getExplodeTime() {
   let t = new Date();
   t.setHours(21, 30, 0);
-
-  if (t - (new Date()) < 0) {
-    return addDayTo(t);
-  } else {
-    return t;
-  }
+  return t;
 }
 
 // 1. english with spaces
@@ -85,6 +79,7 @@ function tick() {
     explode();
     clearInterval(timer);
     appState = 'lost';
+    document.getElementById('imgBomb').src = IMG_NOBOMB;
   } else {
     beep();
     document.getElementById('timer').innerHTML = '還有 ' + getRemainingTime(diffMS);
